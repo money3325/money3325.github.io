@@ -3881,7 +3881,35 @@ input, select, textarea {
 		}
 
 	}
+/* 覆盖模板样式，防止图片被裁剪 */
 .gallery img {
-    height: auto !important;
-    object-fit: contain !important;
+    object-fit: contain !important; /* 关键！将 cover 改为 contain，确保图片完整显示 */
+    height: auto !important; /* 高度自动，按比例缩放 */
+    width: auto !important; /* 宽度自动 */
+    max-width: 100%; /* 最大宽度不超过容器，防止溢出 */
+    max-height: 300px; /* 设置一个最大高度，控制统一性，数值你可以自己调 */
 }
+
+/* 可选：调整画廊项本身的布局，例如改为Flex布局便于自定义 */
+.gallery {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important; /* 图片水平居中 */
+    gap: 20px !important; /* 设置图片之间的间距 */
+}
+
+/* 可选：调整每个图片链接容器的样式 */
+.gallery > a {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    border: 1px solid #eee; /* 可选：添加一个淡淡的边框 */
+    padding: 10px; /* 可选：添加内边距 */
+    background: #f9f9f9; /* 可选：添加一个淡淡的背景色 */
+    border-radius: 5px; /* 可选：添加圆角 */
+}
+.gallery > a.main-image {
+    flex-basis: 100%; /* 让第一个图片占据整行 */
+    max-height: 400px !important; /* 设置得比其他图片高一些 */
+}
+
